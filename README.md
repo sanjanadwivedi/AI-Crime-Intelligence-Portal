@@ -1,5 +1,8 @@
 # 🛡️ AI Crime Intelligence Portal
 
+🌐 **Live Demo:** https://ai-crime-predictive-analysis.streamlit.app/
+
+💻 **GitHub Repository:** https://github.com/sanjanadwivedi/AI-Crime-Intelligence-Portal
 An AI-powered web application that analyzes historical crime data, predicts future crime trends, and visualizes crime statistics through interactive dashboards and maps.
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue)
