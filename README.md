@@ -133,19 +133,39 @@ streamlit run app_streamlit.py
 
 ## 📷 Screenshots
 
-Add screenshots here after deployment.
+### Dashboard
 
-Example:
+![Dashboard](screenshots/dashboard.png)
 
-```
-screenshots/
-│
-├── dashboard.png
-├── prediction.png
-├── analytics.png
-├── heatmap.png
-└── forecasting.png
-```
+---
+
+### AI Prediction
+
+![Prediction](screenshots/prediction.png)
+
+---
+
+### Crime Analytics
+
+![Analytics](screenshots/analytics.png)
+
+---
+
+### Forecasting
+
+![Forecasting](screenshots/forecasting.png)
+
+---
+
+### Heatmap
+
+![Heatmap](screenshots/heatmap.png)
+
+---
+
+### Admin Panel
+
+![Admin Panel](screenshots/admin.png)
 
 ---
 
