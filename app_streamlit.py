@@ -8,7 +8,6 @@ import plotly.graph_objects as go
 import joblib
 import json
 import warnings
-import streamlit_authenticator as stauth
 
 warnings.filterwarnings("ignore")
 
