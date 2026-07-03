@@ -14,32 +14,135 @@ warnings.filterwarnings("ignore")
 # ---------------------------------------------------
 # SIMPLE LOGIN SYSTEM
 # ---------------------------------------------------
-
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
 
 if not st.session_state.logged_in:
 
-    st.title("🔐 Login")
-
-    username = st.text_input("Username")
-
-    password = st.text_input(
-        "Password",
-        type="password"
+    st.set_page_config(
+        page_title="CrimeVision AI",
+        page_icon="🛡️",
+        layout="wide",
+        initial_sidebar_state="collapsed"
     )
 
-    if st.button("Login"):
+    st.markdown("""
+    <style>
 
-        if username == "admin" and password == "admin123":
+    #MainMenu{
+        visibility:hidden;
+    }
 
-            st.session_state.logged_in = True
+    header{
+        visibility:hidden;
+    }
 
-            st.rerun()
+    footer{
+        visibility:hidden;
+    }
 
-        else:
+    .stDeployButton{
+        display:none;
+    }
 
-            st.error("Invalid Username or Password")
+    .stApp{
+        background:#09090B;
+    }
+
+    .login-title{
+        font-size:56px;
+        font-weight:800;
+        color:white;
+        text-align:center;
+        margin-bottom:10px;
+    }
+
+    .login-subtitle{
+        color:#A1A1AA;
+        text-align:center;
+        font-size:18px;
+        margin-bottom:35px;
+    }
+
+    .stTextInput input{
+
+        background:#111827;
+
+        border:1px solid #2D3748;
+
+        border-radius:14px;
+
+        color:white;
+
+        padding:14px;
+
+    }
+
+    .stButton>button{
+
+        width:100%;
+
+        background:#7C3AED;
+
+        color:white;
+
+        border:none;
+
+        border-radius:999px;
+
+        padding:14px;
+
+        font-size:16px;
+
+        font-weight:600;
+
+    }
+
+    .stButton>button:hover{
+
+        background:#8B5CF6;
+
+    }
+
+    </style>
+    """, unsafe_allow_html=True)
+
+    left, center, right = st.columns([1, 1.2, 1])
+
+    with center:
+
+        st.markdown(
+            "<h1 class='login-title'>CrimeVision AI</h1>",
+            unsafe_allow_html=True
+        )
+
+        st.markdown(
+            "<p class='login-subtitle'>Welcome back. Sign in to continue.</p>",
+            unsafe_allow_html=True
+        )
+
+        username = st.text_input(
+            "Username",
+            placeholder="Enter username"
+        )
+
+        password = st.text_input(
+            "Password",
+            type="password",
+            placeholder="Enter password"
+        )
+
+        if st.button("Launch Platform"):
+
+            if username == "admin" and password == "admin123":
+
+                st.session_state.logged_in = True
+
+                st.rerun()
+
+            else:
+
+                st.error("Invalid Username or Password")
 
     st.stop()
 # ---------------------------------------------------
