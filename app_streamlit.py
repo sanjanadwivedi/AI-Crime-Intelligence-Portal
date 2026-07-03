@@ -143,43 +143,16 @@ if not st.session_state.logged_in:
             else:
 
                 st.error("Invalid Username or Password")
-            st.markdown("""
-    <div style="
-        margin-top:25px;
-        padding:18px;
-        border-radius:16px;
-        background:rgba(124,58,237,0.08);
-        border:1px solid rgba(124,58,237,0.25);
-    ">
-        <h4 style="
-            margin:0 0 12px 0;
-            color:#C084FC;
-            font-size:18px;
-        ">
-            💡 Demo Access
-        </h4>
+        st.info("""
+### 💡 Demo Access
 
-        <p style="margin:4px 0;color:#E5E7EB;">
-            <b>Username:</b> admin
-        </p>
+**👤Username:** `admin`
 
-        <p style="margin:4px 0;color:#E5E7EB;">
-            <b>Password:</b> admin123
-        </p>
+** 🔑Password:** `admin123`
 
-        <hr style="border-color:#27272A; margin:14px 0;">
-
-        <p style="
-            margin:0;
-            color:#A1A1AA;
-            font-size:14px;
-            line-height:1.6;
-        ">
-            This is a demonstration version of <b>CrimeVision AI</b>. Use the above credentials to explore Dashboard, AI Prediction, Crime Analytics, Forecasting and Heatmap visualizations.
-        </p>
-
-    </div>
-    """, unsafe_allow_html=True)
+This is a demonstration version of **CrimeVision AI**.
+Use these credentials to explore the Dashboard, AI Prediction, Analytics, Forecasting and Heatmap modules.
+""")
 
     st.stop()
 # ---------------------------------------------------
