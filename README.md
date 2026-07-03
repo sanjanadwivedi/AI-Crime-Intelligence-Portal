@@ -18,6 +18,9 @@ https://github.com/sanjanadwivedi/crimevision-ai-website
 https://github.com/sanjanadwivedi/AI-Crime-Intelligence-Portal
 
 <br>
+💻 **GitHub Repository:** https://github.com/sanjanadwivedi/AI-Crime-Intelligence-Portal
+
+An AI-powered web application that analyzes historical crime data, predicts future crime trends, and visualizes crime statistics through interactive dashboards and maps.
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue)
 ![Streamlit](https://img.shields.io/badge/Streamlit-Latest-red)
@@ -72,14 +75,14 @@ The platform combines AI-based prediction with analytics, forecasting, and geosp
 
 # 🚀 Tech Stack
 
-| Category | Technologies |
-|-----------|--------------|
-| Backend | Python |
-| Framework | Streamlit |
-| ML | Scikit-Learn, CatBoost |
-| Data | Pandas, NumPy |
-| Visualization | Plotly, Folium |
-| Deployment | Streamlit Community Cloud |
+| Category      | Technologies              |
+| ------------- | ------------------------- |
+| Backend       | Python                    |
+| Framework     | Streamlit                 |
+| ML            | Scikit-Learn, CatBoost    |
+| Data          | Pandas, NumPy             |
+| Visualization | Plotly, Folium            |
+| Deployment    | Streamlit Community Cloud |
 
 ---
 

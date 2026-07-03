@@ -1,49 +1,58 @@
-# app_streamlit.py
-
 import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
 import joblib
+import unicodedata
 import json
 import warnings
+import folium
+from streamlit_folium import st_folium
+import branca.colormap as cm
 
 warnings.filterwarnings("ignore")
+with open("geoBoundaries-IND-ADM1.geojson", "r", encoding="utf-8") as f:
+    india_geo = json.load(f)
+
+
+import unicodedata
+
+for feature in india_geo["features"]:
+    props = feature.get("properties", {})
+    if "shapeName" in props:
+        props["shapeName"] = (
+            unicodedata.normalize("NFKD", props["shapeName"])
+            .encode("ascii", "ignore")
+            .decode("ascii")
+        )
+
+# ---------------------------------------------------
+# PAGE CONFIG (ONLY ONCE)
+# ---------------------------------------------------
+st.set_page_config(
+    page_title="CrimeVision AI",
+    page_icon="🛡️",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
 
 # ---------------------------------------------------
 # SIMPLE LOGIN SYSTEM
 # ---------------------------------------------------
+
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
 
 if not st.session_state.logged_in:
 
-    st.set_page_config(
-        page_title="CrimeVision AI",
-        page_icon="🛡️",
-        layout="wide",
-        initial_sidebar_state="collapsed"
-    )
-
     st.markdown("""
     <style>
 
-    #MainMenu{
-        visibility:hidden;
-    }
-
-    header{
-        visibility:hidden;
-    }
-
-    footer{
-        visibility:hidden;
-    }
-
-    .stDeployButton{
-        display:none;
-    }
+    #MainMenu {visibility:hidden;}
+    header {visibility:hidden;}
+    footer {visibility:hidden;}
+    .stDeployButton {display:none;}
 
     .stApp{
         background:#09090B;
@@ -65,43 +74,26 @@ if not st.session_state.logged_in:
     }
 
     .stTextInput input{
-
         background:#111827;
-
         border:1px solid #2D3748;
-
         border-radius:14px;
-
         color:white;
-
         padding:14px;
-
     }
 
     .stButton>button{
-
         width:100%;
-
         background:#7C3AED;
-
         color:white;
-
         border:none;
-
         border-radius:999px;
-
         padding:14px;
-
         font-size:16px;
-
         font-weight:600;
-
     }
 
     .stButton>button:hover{
-
         background:#8B5CF6;
-
     }
 
     </style>
@@ -123,46 +115,71 @@ if not st.session_state.logged_in:
 
         username = st.text_input(
             "Username",
-            placeholder="Enter username"
+            placeholder="Enter username",
+            key="login_username"
         )
 
         password = st.text_input(
             "Password",
             type="password",
-            placeholder="Enter password"
+            placeholder="Enter password",
+            key="login_password"
         )
 
-        if st.button("Launch Platform"):
+        if st.button("Launch Platform", key="login_button"):
 
             if username == "admin" and password == "admin123":
-
                 st.session_state.logged_in = True
-
                 st.rerun()
 
             else:
-
                 st.error("Invalid Username or Password")
-        st.info("#### 💡 Demo Access")
-        st.code("""
-Username : admin
-Password : admin123
-""")
-        st.caption(
-    "Use these credentials to explore Dashboard, AI Prediction, Analytics, Forecasting and Heatmap."
-)
+
+        st.markdown("""
+        <div style="
+        margin-top:30px;
+        padding:18px;
+        border-radius:16px;
+        background:rgba(139,92,246,0.08);
+        border:1px solid rgba(139,92,246,0.25);
+        ">
+
+        <h4 style="
+        margin:0 0 12px 0;
+        color:#C084FC;
+        font-size:18px;
+        ">
+        💡 Demo Access
+        </h4>
+
+        <p style="margin:8px 0;color:#E5E7EB;">
+        <strong>Username:</strong> admin
+        </p>
+
+        <p style="margin:8px 0;color:#E5E7EB;">
+        <strong>Password:</strong> admin123
+        </p>
+
+        <hr style="border:0;border-top:1px solid rgba(255,255,255,.08);margin:16px 0;">
+
+        <p style="
+        margin:0;
+        font-size:14px;
+        line-height:1.6;
+        color:#A1A1AA;
+        ">
+        This is a demonstration version of <strong>CrimeVision AI</strong>.
+        Use these credentials to explore Dashboard, AI Prediction,
+        Analytics, Forecasting, Heatmap and Admin Panel.
+        </p>
+
+        </div>
+        """, unsafe_allow_html=True)
 
     st.stop()
 # ---------------------------------------------------
 # PAGE CONFIG
 # ---------------------------------------------------
-
-st.set_page_config(
-    page_title="AI Crime Intelligence Portal",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
-
 # ---------------------------------------------------
 st.markdown("""
 <style>
@@ -1101,178 +1118,107 @@ Crime Forecasting
     )
 
 # ---------------------------------------------------
-# ---------------------------------------------------
 # HEATMAP
 # ---------------------------------------------------
 
 elif module == "🗺️ Heatmap":
-    
+
     st.markdown("""
-<h2 style='
-color:white;
-font-size:30px;
-font-weight:700;
-margin-bottom:20px;
-'>
-India Crime Hotspot Map
-</h2>
-""", unsafe_allow_html=True)
+    <h2 style='color:white;font-size:30px;font-weight:700;margin-bottom:20px;'>
+    India Crime Hotspot Map
+    </h2>
+    """, unsafe_allow_html=True)
 
-    year_cols = [
-        c for c in state_df.columns
-        if str(c).isdigit()
-    ]
+    year_cols = [c for c in state_df.columns if str(c).isdigit()]
 
-    selected_year = st.selectbox(
-        "Select Year",
-        year_cols
-    )
+    selected_year = st.selectbox("Select Year", year_cols)
 
-    map_df = state_df[
-        ["States_UT", selected_year]
-    ].copy()
+    map_df = state_df[["States_UT", selected_year]].copy()
+    map_df.columns = ["State", "Crime"]
 
-    map_df.columns = [
-        "State",
-        "Crime"
-    ]
-
-    map_df.dropna(inplace=True)
-
-    # MATCH GEOJSON NAMES
+    # State name mapping
     state_mapping = {
+    "A&N Islands": "Andaman and Nicobar",
+    "Delhi": "Delhi",
+    "Jammu & Kashmir": "Jammu and Kashmir",
+    "Odisha": "Orissa",
+    "Uttarakhand": "Uttaranchal"
+}
+    
+    map_df["State"] = map_df["State"].replace(state_mapping)
+    dn = map_df[
+    map_df["State"] == "D&N Haveli Daman & Diu"
+]
+    if not dn.empty:
+        crime = dn.iloc[0]["Crime"]
 
-        "A & N Islands":
-            "Andaman and Nicobar",
+        map_df = map_df[
+            map_df["State"] != "D&N Haveli Daman & Diu"
+        ]
 
-        "Andhra Pradesh":
-            "Andhra Pradesh",
-
-        "Arunachal Pradesh":
-            "Arunachal Pradesh",
-
-        "Assam":
-            "Assam",
-
-        "Bihar":
-            "Bihar",
-
-        "Chhattisgarh":
-            "Chhattisgarh",
-
-        "Delhi UT":
-            "Delhi",
-
-        "Goa":
-            "Goa",
-
-        "Gujarat":
-            "Gujarat",
-
-        "Haryana":
-            "Haryana",
-
-        "Himachal Pradesh":
-            "Himachal Pradesh",
-
-        "Jammu & Kashmir":
-            "Jammu and Kashmir",
-
-        "Jharkhand":
-            "Jharkhand",
-
-        "Karnataka":
-            "Karnataka",
-
-        "Kerala":
-            "Kerala",
-
-        "Madhya Pradesh":
-            "Madhya Pradesh",
-
-        "Maharashtra":
-            "Maharashtra",
-
-        "Manipur":
-            "Manipur",
-
-        "Meghalaya":
-            "Meghalaya",
-
-        "Mizoram":
-            "Mizoram",
-
-        "Nagaland":
-            "Nagaland",
-
-        "Odisha":
-            "Odisha",
-
-        "Punjab":
-            "Punjab",
-
-        "Rajasthan":
-            "Rajasthan",
-
-        "Sikkim":
-            "Sikkim",
-
-        "Tamil Nadu":
-            "Tamil Nadu",
-
-        "Telangana":
-            "Telangana",
-
-        "Tripura":
-            "Tripura",
-
-        "Uttar Pradesh":
-            "Uttar Pradesh",
-
-        "Uttarakhand":
-            "Uttarakhand",
-
-        "West Bengal":
-            "West Bengal"
-    }
-
-    map_df["State"] = map_df["State"].replace(
-        state_mapping
-    )
-
+        map_df = pd.concat([
+            map_df,
+            pd.DataFrame({
+                "State": [
+                    "Dadra and Nagar Haveli",
+                    "Daman and Diu"
+                ],
+                "Crime": [
+                    crime,
+                    crime
+                ]
+            })
+        ], ignore_index=True)
+    
+    geo_states = [
+    f["properties"]["NAME_1"]
+    for f in india_geo["features"]
+]
+   
+    matched = set(map_df["State"]).intersection(
+    set(f["properties"]["NAME_1"] for f in india_geo["features"])
+)
+    
     fig = px.choropleth(
-        map_df,
-        geojson=india_geo,
-        featureidkey="properties.NAME_1",
-        locations="State",
-        color="Crime",
-        color_continuous_scale="Reds",
-        title=f"India Crime Heatmap ({selected_year})"
-    )
+    map_df,
+    geojson=india_geo,
+    locations="State",
+    featureidkey="properties.NAME_1",
+    color="Crime",
+    color_continuous_scale=[
+    "#fff5f0",
+    "#fcbba1",
+    "#fb6a4a",
+    "#cb181d",
+    "#67000d",
+],
+    hover_name="State",
+    hover_data={
+    "Crime": ":,",
+    "State": False
+},
+)
 
     fig.update_geos(
         fitbounds="locations",
-        visible=False
+        visible=False,
+        showcountries=False,
+        showcoastlines=False,
+        showframe=False
     )
 
     fig.update_layout(
-        height=700,
-        margin={
-            "r":0,
-            "t":50,
-            "l":0,
-            "b":0
-        },
         paper_bgcolor="#0B1120",
         plot_bgcolor="#0B1120",
-        font_color="white"
+        font_color="white",
+        height=700,
+        margin=dict(l=0, r=0, t=50, b=0),
+        coloraxis_colorbar=dict(
+        title="Total Crime Cases"
+    )
     )
 
-    st.plotly_chart(
-        fig,
-        width="stretch"
-    )
-
+    st.plotly_chart(fig, use_container_width=True)
 # ---------------------------------------------------
 # ADMIN PANEL
 # ---------------------------------------------------
