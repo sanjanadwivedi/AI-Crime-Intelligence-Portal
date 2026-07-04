@@ -1,101 +1,118 @@
+<div align="center">
+
 # 🛡️ AI Crime Intelligence Portal
 
-🌐 **Live Demo:** https://ai-crime-predictive-analysis.streamlit.app/
+### AI-Powered Crime Prediction & Analytics Platform
 
-💻 **GitHub Repository:** https://github.com/sanjanadwivedi/AI-Crime-Intelligence-Portal
+Interactive Streamlit application for predicting crime trends, forecasting future crime levels, visualizing crime statistics, and analyzing historical NCRB data using Machine Learning.
 
-An AI-powered web application that analyzes historical crime data, predicts future crime trends, and visualizes crime statistics through interactive dashboards and maps.
+<br>
+
+🌐 **Live Demo**  
+https://ai-crime-predictive-analysis.streamlit.app/
+
+💻 **Website Repository**  
+https://github.com/sanjanadwivedi/crimevision-ai-website
+
+💻 **AI Platform Repository**  
+https://github.com/sanjanadwivedi/AI-Crime-Intelligence-Portal
+
+<br>
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue)
 ![Streamlit](https://img.shields.io/badge/Streamlit-Latest-red)
-![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-ML-orange)
+![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-Machine%20Learning-orange)
 ![Plotly](https://img.shields.io/badge/Plotly-Interactive-success)
+![CatBoost](https://img.shields.io/badge/CatBoost-ML-yellow)
+
+</div>
 
 ---
 
-## 📌 Overview
+# 📸 Dashboard Preview
 
-The AI Crime Intelligence Portal is designed to help users explore historical crime trends, visualize crime statistics, and forecast future crime levels using machine learning.
-
-The application provides an intuitive dashboard with interactive charts, forecasting, heatmaps, and an AI-based prediction system, making crime analytics more accessible for researchers, students, and decision-makers.
+<p align="center">
+<img src="screenshots/dashboard.png" width="100%">
+</p>
 
 ---
 
-## ✨ Features
+# 🚀 Overview
 
+The AI Crime Intelligence Portal is a Machine Learning-powered web application that enables users to analyze historical NCRB crime data, predict future crime trends, and explore interactive visualizations through an intuitive dashboard.
+
+The platform combines AI-based prediction with analytics, forecasting, and geospatial heatmaps to provide meaningful crime insights for researchers, students, and decision-makers.
+
+---
+
+# ✨ Features
+
+- 🔐 Secure Demo Login
 - 📊 Interactive Crime Dashboard
 - 🤖 AI Crime Prediction
 - 📈 Crime Forecasting
+- 📉 Crime Analytics
 - 🗺️ India Crime Heatmap
-- 📉 Crime Analytics & Trends
-- 📂 Dataset Upload (Admin Panel)
+- 📂 Admin Dataset Upload
 - 💾 Download Processed Dataset
 - 🌙 Modern Dark Theme UI
 
 ---
 
-## 🧠 Machine Learning
-
-The prediction model is trained using historical NCRB crime data.
-
-### Workflow
+# 🧠 Machine Learning Workflow
 
 - Data Collection
-- Data Cleaning & Preprocessing
-- Feature Selection
+- Data Cleaning
+- Feature Engineering
 - Model Training
-- Crime Prediction
-- Visualization
+- Prediction
+- Interactive Visualization
 
 ---
 
-## 📂 Project Structure
+# 🚀 Tech Stack
+
+| Category | Technologies |
+|-----------|--------------|
+| Backend | Python |
+| Framework | Streamlit |
+| ML | Scikit-Learn, CatBoost |
+| Data | Pandas, NumPy |
+| Visualization | Plotly, Folium |
+| Deployment | Streamlit Community Cloud |
+
+---
+
+# 📂 Project Structure
 
 ```text
 crime-project-portal/
-│
+
 ├── app_streamlit.py
 ├── train_model.py
 ├── requirements.txt
 ├── README.md
 ├── india_states.geojson
 ├── state_name_map.json
-│
+
 ├── data/
-│   ├── 2000-22.xlsx
-│   └── Total IPC Crimes byState_UT(2011-2022).xlsx
-│
+
 ├── models/
-│   └── crime_model.pkl
-│
-└── uploads/
+
+├── screenshots/
 ```
 
 ---
 
-## 🚀 Technologies Used
+# 📊 Dataset
 
-- Python
-- Streamlit
-- Pandas
-- NumPy
-- Scikit-learn
-- Plotly
-- Folium
-- OpenPyXL
-- Joblib
+The application uses NCRB (National Crime Records Bureau) crime datasets covering multiple years.
 
----
-
-## 📊 Dataset
-
-The project uses crime datasets based on NCRB (National Crime Records Bureau) reports.
-
-Dataset includes:
+Included crime categories:
 
 - Murder
-- Robbery
 - Theft
+- Robbery
 - Burglary
 - Kidnapping
 - Rape
@@ -103,22 +120,34 @@ Dataset includes:
 - Dowry Deaths
 - Other IPC Crimes
 
-along with yearly crime statistics for analysis and prediction.
+These datasets are used for visualization, forecasting, and AI-based crime prediction.
 
 ---
 
-## ⚙️ Installation
+# 🌐 Related Project
 
-Clone the repository
+This AI platform is part of the **CrimeVision AI** ecosystem.
+
+Official Landing Website:
+
+https://github.com/sanjanadwivedi/crimevision-ai-website
+
+The website provides:
+
+- Premium landing page
+- Product overview
+- Platform modules
+- Workflow explanation
+- Direct launch into the AI application
+
+---
+
+# ⚙️ Installation
+
+Clone repository
 
 ```bash
-git clone https://github.com/sanjanadwivedi/crime-project-portal.git
-```
-
-Go inside the project
-
-```bash
-cd crime-project-portal
+git clone https://github.com/sanjanadwivedi/AI-Crime-Intelligence-Portal.git
 ```
 
 Install dependencies
@@ -127,7 +156,7 @@ Install dependencies
 pip install -r requirements.txt
 ```
 
-Run the application
+Run
 
 ```bash
 streamlit run app_streamlit.py
@@ -135,62 +164,75 @@ streamlit run app_streamlit.py
 
 ---
 
-## 📷 Screenshots
+# 📷 Application Screenshots
 
-### Dashboard
+## Login
+
+![Login](screenshots/login.png)
+
+---
+
+## Dashboard
 
 ![Dashboard](screenshots/dashboard.png)
 
 ---
 
-### AI Prediction
+## AI Prediction
 
 ![Prediction](screenshots/prediction.png)
 
 ---
 
-### Crime Analytics
+## Crime Analytics
 
 ![Analytics](screenshots/analytics.png)
 
 ---
 
-### Forecasting
+## Forecasting
 
 ![Forecasting](screenshots/forecasting.png)
 
 ---
 
-### Heatmap
+## Heatmap
 
 ![Heatmap](screenshots/heatmap.png)
 
 ---
 
-### Admin Panel
+## Admin Panel
 
 ![Admin Panel](screenshots/admin.png)
 
 ---
 
-## 🎯 Future Enhancements
+# 🎯 Future Enhancements
 
 - Multi-user authentication
-- Live crime dataset integration
+- Real-time crime data integration
 - Advanced forecasting models
-- Cloud deployment
-- Automated report generation
+- AI chatbot assistant
+- Automated PDF reports
+- Cloud database integration
 
 ---
 
-## 👩‍💻 Developer
+# 👩‍💻 Developer
 
 **Sanjana Dwivedi**
 
-B.Sc. (Hons.) Computer Science
+Computer Science Undergraduate
 
-Passionate about Data Analytics, Machine Learning, and AI-powered applications.
+Passionate about Artificial Intelligence, Data Analytics, Machine Learning, and Full-Stack Development.
 
 ---
 
-## ⭐ If you found this project useful, consider giving it a star!
+<div align="center">
+
+### ⭐ If you found this project useful, consider giving it a star!
+
+Built with ❤️ using Python, Streamlit & Machine Learning.
+
+</div>
