@@ -143,16 +143,14 @@ if not st.session_state.logged_in:
             else:
 
                 st.error("Invalid Username or Password")
-        st.info("""
-### 💡 Demo Access
-
-**👤Username:** `admin`
-
-** 🔑Password:** `admin123`
-
-This is a demonstration version of **CrimeVision AI**.
-Use these credentials to explore the Dashboard, AI Prediction, Analytics, Forecasting and Heatmap modules.
+        st.info("#### 💡 Demo Access")
+        st.code("""
+Username : admin
+Password : admin123
 """)
+        st.caption(
+    "Use these credentials to explore Dashboard, AI Prediction, Analytics, Forecasting and Heatmap."
+)
 
     st.stop()
 # ---------------------------------------------------
