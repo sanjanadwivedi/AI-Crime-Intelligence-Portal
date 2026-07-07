@@ -20,3 +20,6 @@ ncrb_global_ensemble_outputs/
 ncrb_global_ensemble_outputs_v2/
 
 ncrb_global_notebook_outputs/
+SOI_States.geojson
+SOI_States.geojsonl
+*.7z

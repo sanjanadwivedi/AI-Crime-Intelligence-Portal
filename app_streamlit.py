@@ -1198,6 +1198,12 @@ elif module == "🗺️ Heatmap":
     "State": False
 },
 )
+    st.markdown("""
+<small style="color:#A0AEC0;">
+<b>Note:</b> This visualization uses NCRB state-wise crime statistics with publicly available administrative boundary data.
+Minor differences from the latest official map may exist due to boundary dataset updates and historical state reorganization.
+</small>
+""", unsafe_allow_html=True)
 
     fig.update_geos(
         fitbounds="locations",
