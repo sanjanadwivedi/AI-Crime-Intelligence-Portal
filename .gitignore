@@ -23,3 +23,8 @@ ncrb_global_notebook_outputs/
 SOI_States.geojson
 SOI_States.geojsonl
 *.7z
+
+*.geojsonl
+SOI_States.geojson
+SOI_States.geojsonl
+*.7z
